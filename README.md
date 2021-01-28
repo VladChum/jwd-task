@@ -2,7 +2,7 @@
 ##### Chumachov Vlad
 ##
 ### Task1
-<<<<<<< HEAD
+
 1)create two packages and two class (Main, Point)
 
 ![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/1.png)
@@ -21,15 +21,4 @@
 
 6)compile "fat jar" program
 
-=======
-
-![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/1.png)
-
-![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/2.png)
-
-![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/3.png)
-
-![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/5.png)
-
->>>>>>> c745c33... Add screenshots
 ![Image alt](https://github.com/VladChum/jwd-task/blob/master/screenshots/6.png)
