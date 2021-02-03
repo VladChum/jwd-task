@@ -42,6 +42,5 @@ public class Main {
             logger.log(Level.ERROR, "Exception " + e.toString());
 
         }
-
     }
 }
