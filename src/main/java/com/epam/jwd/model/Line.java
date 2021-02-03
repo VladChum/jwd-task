@@ -27,6 +27,8 @@ public class Line extends Figure {
     }
 
     public boolean existLine() {
-        return points.get(0).equals(points.get(1));
+
+        return points.get(0).getX() == points.get(1).getX()
+                && points.get(0).getY() == points.get(1).getY() ? true : false;
     }
 }
