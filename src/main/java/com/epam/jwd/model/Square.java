@@ -2,48 +2,51 @@ package com.epam.jwd.model;
 
 import org.apache.log4j.Level;
 
+import java.util.List;
+
 import static com.epam.jwd.app.Main.logger;
+import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class Square extends Figure {
-    private Point firstPoint;
-    private Point secondPoint;
-    private Point thirdPoint;
-    private Point fourthPoint;
+    private List<Point> points;
 
-    public Square(Point firstPoint, Point secondPoint, Point thirdPoint,
-                  Point fourthPoint) {
+    Square(List<Point> points) {
         super(FigureType.SQUARE);
-        this.firstPoint = firstPoint;
-        this.secondPoint = secondPoint;
-        this.thirdPoint = thirdPoint;
-        this.fourthPoint = fourthPoint;
+        this.points = points;
     }
 
     @Override
-    public void getInfo() {
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    @Override
+    public void outputInformation() {
         if (comparePoints() == false) {
             logger.log(Level.ERROR, "Object id = " + getId() + " not " +
                     getFigureType());
-        } else if (checkSquare() == false) {
+        } else if (existSquare() == false) {
             logger.log(Level.ERROR, "Object id = " + getId() + " " +
                     getFigureType() + " cannot exist!");
         } else {
-            logger.log(Level.INFO, "Square info: points (" +
-                    firstPoint.getX() + "," + firstPoint.getY() + ") (" +
-                    secondPoint.getX() + "," + secondPoint.getY() + ") (" +
-                    thirdPoint.getX() + "," + thirdPoint.getY() + ") (" +
-                    fourthPoint.getX() + "," + fourthPoint.getY() + ") id: " +
-                    getId());
+            logger.log(Level.INFO, "Square info: points ("
+                    + points.get(0).getX() + "," + points.get(0).getY() + ") ("
+                    + points.get(1).getX() + "," + points.get(1).getY() + ") ("
+                    + points.get(2).getX() + "," + points.get(2).getY() + ") ("
+                    + points.get(3).getX() + "," + points.get(3).getY() + ") id: "
+                    + getId());
         }
     }
 
-    protected boolean checkSquare() {
+    public boolean existSquare() {
         boolean result = false;
-        if (side(firstPoint, secondPoint) == side(secondPoint, thirdPoint) &&
-                side(thirdPoint, fourthPoint) == side(fourthPoint, firstPoint)
-                && side(firstPoint, fourthPoint) ==
-                side(firstPoint, secondPoint) &&
-                side(firstPoint, thirdPoint) == side(secondPoint, fourthPoint)){
+        if (distanceBetweenPoints(points.get(0), points.get(1)) == distanceBetweenPoints(points.get(1), points.get(2))
+                && distanceBetweenPoints(points.get(2), points.get(3))
+                == distanceBetweenPoints(points.get(3), points.get(0))
+                && distanceBetweenPoints(points.get(0), points.get(3))
+                == distanceBetweenPoints(points.get(1), points.get(1))
+                && distanceBetweenPoints(points.get(0), points.get(2))
+                == distanceBetweenPoints(points.get(1), points.get(3))) {
             result = true;
         }
         return result;
@@ -51,10 +54,9 @@ public class Square extends Figure {
 
     protected boolean comparePoints() {
         boolean result = true;
-        if (firstPoint.equals(secondPoint) && firstPoint.equals(thirdPoint) &&
-                firstPoint.equals(fourthPoint) && secondPoint.equals(thirdPoint)
-                && secondPoint.equals(fourthPoint) &&
-                thirdPoint.equals(fourthPoint)) {
+        if (points.get(0).equals(points.get(1)) && points.get(0).equals(points.get(2))
+                && points.get(0).equals(points.get(3)) && points.get(1).equals(points.get(2))
+                && points.get(1).equals(points.get(3)) && points.get(2).equals(points.get(3))) {
             result = false;
         }
         logger.log(Level.DEBUG, "result = " + result);

@@ -1,47 +1,55 @@
 package com.epam.jwd.model;
 
+import com.epam.jwd.strategy.impl.TrianglePropertiesStrategy;
 import org.apache.log4j.Level;
 
+import java.util.List;
+
 import static com.epam.jwd.app.Main.logger;
+import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class Triangle extends Figure {
-    private Point firstPoint;
-    private Point secondPoint;
-    private Point thirdPoint;
+    private List<Point> points;
 
-    public Triangle(Point firstPoint, Point secondPoint, Point thirdPoint) {
+    Triangle(List<Point> points) {
         super(FigureType.TRIANGLE);
-        this.firstPoint = firstPoint;
-        this.secondPoint = secondPoint;
-        this.thirdPoint = thirdPoint;
+        this.points = points;
     }
 
     @Override
-    public void getInfo() {
-        if (firstPoint.equals(secondPoint) ||
-                firstPoint.equals(thirdPoint) ||
-                secondPoint.equals(thirdPoint)) {
-            logger.log(Level.ERROR, "Object id = " + getId() + " not " +
-                    getFigureType());
-        } else if (checkTriangle() == false) {
-            logger.log(Level.ERROR, "Object id = " + getId() + " " +
-                    getFigureType() + " cannot exist!");
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    @Override
+    public void outputInformation() {
+        if (points.get(0).equals(points.get(1)) ||
+                points.get(0).equals(points.get(2)) ||
+                points.get(1).equals(points.get(2))) {
+            logger.log(Level.ERROR, "Object id = " + getId() + " not "
+                    + getFigureType());
+        } else if (existTriangle() == false) {
+            logger.log(Level.ERROR, "Object id = " + getId() + " "
+                    + getFigureType() + " cannot exist!");
         } else {
-            logger.log(Level.INFO, "Triangle info: points (" +
-                    firstPoint.getX() + "," + firstPoint.getY() + ") (" +
-                    secondPoint.getX() + "," + secondPoint.getY() + ") (" +
-                    thirdPoint.getX() + "," + thirdPoint.getY() + ") id: " +
-                    getId());
+            logger.log(Level.INFO, "Triangle info: points ("
+                    + points.get(0).getX() + "," + points.get(0).getY() + ") ("
+                    + points.get(1).getX() + "," + points.get(1).getY() + ") ("
+                    + points.get(2).getX() + "," + points.get(2).getY() + ") id: "
+                    + getId());
         }
     }
 
-    protected boolean checkTriangle() {
+    public boolean existTriangle() {
         boolean triangle = true;
-        if (side(firstPoint, secondPoint) + side(secondPoint, thirdPoint) <=
-                side(firstPoint, thirdPoint) || side(firstPoint, secondPoint) +
-                side(firstPoint, thirdPoint) <= side(secondPoint, thirdPoint) ||
-                side(secondPoint, thirdPoint) + side(firstPoint, thirdPoint) <=
-                        side(firstPoint, secondPoint)) {
+        if (distanceBetweenPoints(points.get(0), points.get(1)) + distanceBetweenPoints(points.get(1), points.get(2))
+                <= distanceBetweenPoints(points.get(0), points.get(2))
+                || distanceBetweenPoints(points.get(0), points.get(1))
+                + distanceBetweenPoints(points.get(0), points.get(2))
+                <= distanceBetweenPoints(points.get(1), points.get(2))
+                || distanceBetweenPoints(points.get(1), points.get(2))
+                + distanceBetweenPoints(points.get(0), points.get(2))
+                <= distanceBetweenPoints(points.get(0), points.get(1))) {
             triangle = false;
         }
         return triangle;

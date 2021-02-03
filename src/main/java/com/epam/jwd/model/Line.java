@@ -2,43 +2,31 @@ package com.epam.jwd.model;
 
 import org.apache.log4j.Level;
 
+import java.util.List;
+
 import static com.epam.jwd.app.Main.logger;
+import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class Line extends Figure {
-    private Point firstPoint;
-    private Point secondPoint;
+    private List<Point> points;
 
-    public Point getFirstPoint() {
-        return firstPoint;
-    }
-
-    public void setFirstPoint(Point firstPoint) {
-        this.firstPoint = firstPoint;
-    }
-
-    public Point getSecondPoint() {
-        return secondPoint;
-    }
-
-    public void setSecondPoint(Point secondPoint) {
-        this.secondPoint = secondPoint;
-    }
-
-    public Line(Point firstPoint, Point secondPoint) {
+    Line(List<Point> points) {
         super(FigureType.LINE);
-        this.firstPoint = firstPoint;
-        this.secondPoint = secondPoint;
+        this.points = points;
     }
 
     @Override
-    public void getInfo() {
-        if (firstPoint.equals(secondPoint)) {
-            logger.log(Level.ERROR, "Object id = " + getId() + " not " +
-                    getFigureType());
-        } else {
-            logger.log(Level.INFO, "Line info: points (" + firstPoint.getX() +
-                    "," + firstPoint.getY() + ") (" + secondPoint.getX() + "," +
-                    secondPoint.getY() + ") id: " + getId());
-        }
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    @Override
+    public void outputInformation() {
+        logger.log(Level.INFO, "Line info: points (" + points.get(0).getX() + "," + points.get(0).getY()
+                + ") (" + points.get(1).getX() + "," + points.get(1).getY() + ") id: " + getId());
+    }
+
+    public boolean existLine() {
+        return points.get(0).equals(points.get(1));
     }
 }

@@ -1,48 +1,32 @@
 package com.epam.jwd.app;
 
+import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.model.*;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
     public static Logger logger = Logger.getLogger(Main.class.getName());
 
-    public static void main(String[] args) {
-        final int pointsQuantity = 4;
-        final int linesQuantity = 2;
-        final int trianglesQuantity = 2;
-        final int squaresQuantity = 1;
+    public static void main(String[] args) throws FigureException {
+        List<Point> pointsForLine = new ArrayList<>();
+        pointsForLine.add(new Point(1, 1));
+        pointsForLine.add(new Point(2, 2));
+        pointsForLine.add(new Point(1, 1));
+        pointsForLine.add(new Point(2, 2));
 
-        Point[] points = new Point[pointsQuantity];
-        Line[] lines = new Line[linesQuantity];
-        Triangle[] triangles = new Triangle[trianglesQuantity];
-        Square[] squares = new Square[squaresQuantity];
+        List<Point> pointsForTriangle = new ArrayList<>();
+        pointsForTriangle.add(new Point(1, 1));
+        pointsForTriangle.add(new Point(1, 5));
+        pointsForTriangle.add(new Point(4, 1));
 
-        points[0] = new Point(1,1);
-        points[1] = new Point(1,2);
-        points[2] = new Point(2,2);
-        points[3] = new Point(2,1);
-
-        int numberPoint = 0;
-        do {
-            points[numberPoint].getPoint();
-            numberPoint++;
-        } while (numberPoint < points.length);
-
-        lines[0] = new Line(points[0], points[2]);
-        lines[1] = new Line(points[1], new Point(1, 2));
-        triangles[0] = new Triangle(points[0], points[1], points[2]);
-        triangles[1] = new Triangle(points[0], points[1], new Point(1, -1));
-        squares[0] = new Square(points[0], points[1], points[2], points[3]);
-
-        printFigureInfo(lines);
-        printFigureInfo(triangles);
-        printFigureInfo(squares);
-    }
-
-    static void printFigureInfo(Figure [] figures){
-        for (Figure figure : figures){
-            figure.getInfo();
-        }
+        Figure triangle = new FigureFactory().createFigure(FigureType.TRIANGLE, pointsForTriangle);
+        triangle.outputInformation();
+        logger.log(Level.INFO, triangle.calculateArea());
+        logger.log(Level.INFO, triangle.calculatePerimeter());
     }
 }

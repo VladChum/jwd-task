@@ -1,16 +1,21 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.app.Main;
-import org.apache.log4j.Level;
+import com.epam.jwd.strategy.FigurePropertiesStrategy;
+import com.epam.jwd.strategy.impl.LinePropertiesStrategy;
+import com.epam.jwd.strategy.impl.MultiAngleFigurePropertiesStrategy;
+import com.epam.jwd.strategy.impl.SquarePropertiesStrategy;
+import com.epam.jwd.strategy.impl.TrianglePropertiesStrategy;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
 
-import static com.epam.jwd.app.Main.logger;
-
-public class Figure {
+public abstract class Figure {
     private static int count = 0;
-    private int id;
+    private FigurePropertiesStrategy figurePropertiesStrategy;
     private FigureType figureType;
+    private int id;
+
+
+    public abstract List<Point> getPoints();
 
     public int getId() {
         return id;
@@ -20,18 +25,35 @@ public class Figure {
         return figureType;
     }
 
-    public Figure(FigureType figureType){
+    public Figure(FigureType figureType) {
         this.id = ++count;
         this.figureType = figureType;
     }
 
-    static double side(Point firstPoint, Point secondPoint){
-        double side;
-        side = Math.sqrt(Math.pow(secondPoint.getX() - firstPoint.getX(), 2) +
-                Math.pow(secondPoint.getY() - firstPoint.getY(), 2));
-        return side;
+    public void setTriangleStrategy() {
+        this.figurePropertiesStrategy = TrianglePropertiesStrategy.getInstance();
     }
 
-    public void getInfo() {
+    public void setLineStrategy() {
+        this.figurePropertiesStrategy = LinePropertiesStrategy.getInstance();
     }
+
+    public void setSquareStrategy() {
+        this.figurePropertiesStrategy = SquarePropertiesStrategy.INSTANCE;
+    }
+
+    public void setMultiAngelFigureStrategy() {
+        this.figurePropertiesStrategy = MultiAngleFigurePropertiesStrategy.getInstance();
+    }
+
+    public abstract void outputInformation();
+
+    public double calculateArea() {
+        return figurePropertiesStrategy.calculateArea(getPoints());
+    }
+
+    public double calculatePerimeter() {
+        return figurePropertiesStrategy.calculatePerimeter(getPoints());
+    }
+
 }
