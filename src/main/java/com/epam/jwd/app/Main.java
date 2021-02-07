@@ -1,6 +1,6 @@
 package com.epam.jwd.app;
 
-import com.epam.jwd.Factory.ApplicationContext;
+import com.epam.jwd.factory.ApplicationContext;
 import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.model.*;
 import org.apache.log4j.Level;

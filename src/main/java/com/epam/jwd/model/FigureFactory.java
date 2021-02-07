@@ -1,6 +1,6 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.Factory.Factory;
+import com.epam.jwd.factory.Factory;
 import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.exception.FigureNotExistException;
 

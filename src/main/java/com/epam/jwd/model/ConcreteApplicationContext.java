@@ -1,7 +1,7 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.Factory.ApplicationContext;
-import com.epam.jwd.Factory.Factory;
+import com.epam.jwd.factory.ApplicationContext;
+import com.epam.jwd.factory.Factory;
 import com.epam.jwd.decorator.LogPostProcessorDecorator;
 import com.epam.jwd.decorator.PostProcessorDecorator;
 import com.epam.jwd.decorator.PreProcessorDecorator;

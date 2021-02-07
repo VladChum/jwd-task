@@ -1,4 +1,4 @@
-package com.epam.jwd.Factory;
+package com.epam.jwd.factory;
 
 public interface ApplicationContext {
      Factory createFigureFactory();
