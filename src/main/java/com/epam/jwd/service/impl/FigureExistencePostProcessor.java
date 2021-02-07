@@ -7,25 +7,25 @@ import com.epam.jwd.service.FigurePostProcessor;
 
 public class FigureExistencePostProcessor implements FigurePostProcessor {
     @Override
-    public Figure process(Figure figure) throws FigureException {
+    public Figure postProcess(Figure figure) throws FigureException {
         if (figure instanceof Line) {
             figure.setLineStrategy();
-            if (!((Line) figure).existLine()) {
+            if (!figure.isExist()) {
                 throw new FigureNotExistException("Line doesnt not exist!!!");
             }
         } else if (figure instanceof Triangle) {
             figure.setTriangleStrategy();
-            if (!((Triangle) figure).existTriangle()) {
+            if (!figure.isExist()) {
                 throw new FigureNotExistException("Triangle doesnt not exist");
             }
         } else if (figure instanceof Square) {
             figure.setSquareStrategy();
-            if (!((Square) figure).existSquare()) {
+            if (!figure.isExist()) {
                 throw new FigureNotExistException("Square doesnt not exist");
             }
         } else if (figure instanceof MultiAngleFigure) {
             figure.setMultiAngelFigureStrategy();
-            if (!((MultiAngleFigure) figure).existMultiAngelFigure()) {
+            if (!figure.isExist()) {
                 throw new FigureNotExistException("MultiAngleFigure doesnt not exist");
             }
         }
