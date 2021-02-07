@@ -1,17 +1,14 @@
 package com.epam.jwd.model;
 
+import com.epam.jwd.Factory.Factory;
 import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.exception.FigureNotExistException;
-import com.epam.jwd.service.FigurePostProcessor;
-import com.epam.jwd.service.impl.FigureExistencePostProcessor;
 
 import java.util.List;
 
 
-public class FigureFactory {
-
-    private final static FigurePostProcessor figurePostProcessor = new FigureExistencePostProcessor();
-
+public class FigureFactory implements Factory {
+    @Override
     public Figure createFigure(FigureType figureType, List<Point> points) throws FigureException {
         Figure figure = null;
         switch (figureType) {
@@ -30,7 +27,6 @@ public class FigureFactory {
             default:
                 throw new FigureNotExistException("Invalid figure type!!!");
         }
-        figure = figurePostProcessor.process(figure);
         return figure;
     }
 }
