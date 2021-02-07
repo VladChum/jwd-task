@@ -4,10 +4,10 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.FigurePropertiesStrategy;
 
 import java.util.List;
+
 import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
-
     //lazy singleton
     private static TrianglePropertiesStrategy instance;
 
@@ -41,4 +41,19 @@ public class TrianglePropertiesStrategy implements FigurePropertiesStrategy {
         return 0.5 * Math.abs(area);
     }
 
+    @Override
+    public boolean exist(List<Point> points) {
+        boolean triangle = true;
+        if (distanceBetweenPoints(points.get(0), points.get(1)) + distanceBetweenPoints(points.get(1), points.get(2))
+                <= distanceBetweenPoints(points.get(0), points.get(2))
+                || distanceBetweenPoints(points.get(0), points.get(1))
+                + distanceBetweenPoints(points.get(0), points.get(2))
+                <= distanceBetweenPoints(points.get(1), points.get(2))
+                || distanceBetweenPoints(points.get(1), points.get(2))
+                + distanceBetweenPoints(points.get(0), points.get(2))
+                <= distanceBetweenPoints(points.get(0), points.get(1))) {
+            triangle = false;
+        }
+        return triangle;
+    }
 }

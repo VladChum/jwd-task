@@ -33,4 +33,17 @@ public enum SquarePropertiesStrategy implements FigurePropertiesStrategy {
         }
         return 0.5 * Math.abs(area);
     }
+
+    @Override
+    public boolean exist(List<Point> points) {
+        boolean result = false;
+        if ((distanceBetweenPoints(points.get(0), points.get(1)) == distanceBetweenPoints(points.get(1), points.get(2))
+                && distanceBetweenPoints(points.get(2), points.get(3))
+                == distanceBetweenPoints(points.get(3), points.get(0)))
+                && distanceBetweenPoints(points.get(0), points.get(2))
+                == distanceBetweenPoints(points.get(1), points.get(3))) {
+            result = true;
+        }
+        return result;
+    }
 }

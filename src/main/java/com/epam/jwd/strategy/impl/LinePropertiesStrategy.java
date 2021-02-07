@@ -25,4 +25,10 @@ public class LinePropertiesStrategy implements FigurePropertiesStrategy {
     public double calculateArea(List<Point> points) {
         return 0;
     }
+
+    @Override
+    public boolean exist(List<Point> points) {
+      return points.get(0).getX() == points.get(1).getX()
+                && points.get(0).getY() == points.get(1).getY() ? false : true;
+    }
 }

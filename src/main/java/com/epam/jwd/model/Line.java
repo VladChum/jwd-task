@@ -1,11 +1,9 @@
 package com.epam.jwd.model;
 
 import org.apache.log4j.Level;
-
 import java.util.List;
 
 import static com.epam.jwd.app.Main.logger;
-import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class Line extends Figure {
     private List<Point> points;
@@ -24,11 +22,5 @@ public class Line extends Figure {
     public void outputInformation() {
         logger.log(Level.INFO, "Line info: points (" + points.get(0).getX() + "," + points.get(0).getY()
                 + ") (" + points.get(1).getX() + "," + points.get(1).getY() + ") id: " + getId());
-    }
-
-    public boolean existLine() {
-
-        return points.get(0).getX() == points.get(1).getX()
-                && points.get(0).getY() == points.get(1).getY() ? true : false;
     }
 }

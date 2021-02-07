@@ -14,7 +14,6 @@ public abstract class Figure {
     private FigureType figureType;
     private int id;
 
-
     public abstract List<Point> getPoints();
 
     public int getId() {
@@ -26,6 +25,7 @@ public abstract class Figure {
     }
 
     public Figure(FigureType figureType) {
+        this.figurePropertiesStrategy = LinePropertiesStrategy.getInstance();
         this.id = ++count;
         this.figureType = figureType;
     }
@@ -54,6 +54,10 @@ public abstract class Figure {
 
     public double calculatePerimeter() {
         return figurePropertiesStrategy.calculatePerimeter(getPoints());
+    }
+
+    public boolean isExist() {
+        return figurePropertiesStrategy.exist(getPoints());
     }
 
 }

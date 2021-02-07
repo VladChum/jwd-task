@@ -5,7 +5,6 @@ import org.apache.log4j.Level;
 import java.util.List;
 
 import static com.epam.jwd.app.Main.logger;
-import static com.epam.jwd.model.Point.distanceBetweenPoints;
 
 public class Square extends Figure {
     private List<Point> points;
@@ -25,9 +24,6 @@ public class Square extends Figure {
         if (comparePoints() == false) {
             logger.log(Level.ERROR, "Object id = " + getId() + " not " +
                     getFigureType());
-        } else if (existSquare() == false) {
-            logger.log(Level.ERROR, "Object id = " + getId() + " " +
-                    getFigureType() + " cannot exist!");
         } else {
             logger.log(Level.INFO, "Square info: points ("
                     + points.get(0).getX() + "," + points.get(0).getY() + ") ("
@@ -38,20 +34,6 @@ public class Square extends Figure {
         }
     }
 
-    public boolean existSquare() {
-        boolean result = false;
-        if (distanceBetweenPoints(points.get(0), points.get(1)) == distanceBetweenPoints(points.get(1), points.get(2))
-                && distanceBetweenPoints(points.get(2), points.get(3))
-                == distanceBetweenPoints(points.get(3), points.get(0))
-                && distanceBetweenPoints(points.get(0), points.get(3))
-                == distanceBetweenPoints(points.get(1), points.get(1))
-                && distanceBetweenPoints(points.get(0), points.get(2))
-                == distanceBetweenPoints(points.get(1), points.get(3))) {
-            result = true;
-        }
-        return result;
-    }
-
     protected boolean comparePoints() {
         boolean result = true;
         if (points.get(0).equals(points.get(1)) && points.get(0).equals(points.get(2))
@@ -59,7 +41,6 @@ public class Square extends Figure {
                 && points.get(1).equals(points.get(3)) && points.get(2).equals(points.get(3))) {
             result = false;
         }
-        logger.log(Level.DEBUG, "result = " + result);
         return result;
     }
 }

@@ -48,4 +48,27 @@ public class MultiAngleFigurePropertiesStrategy implements FigurePropertiesStrat
         }
         return 0.5 * Math.abs(area);
     }
+
+    @Override
+    public boolean exist(List<Point> points) {
+        boolean multiAngelFigure = true;
+        //check not the location of points in a line
+        for (int i = 0; i < points.size(); i++) {
+            int numberEqualX = 0;
+            int numberEqualY = 0;
+            for (int j = 0; j < points.size(); j++) {
+                if (points.get(j).getX() == points.get(i).getX()) {
+                    numberEqualX++;
+                }
+                if (points.get(j).getY() == points.get(i).getY()) {
+                    numberEqualY++;
+                }
+            }
+            if (numberEqualX == points.size() || numberEqualY == points.size()) {
+                multiAngelFigure = false;
+                break;
+            }
+        }
+        return multiAngelFigure;
+    }
 }
