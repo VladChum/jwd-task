@@ -11,6 +11,5 @@ public class FigureExistencePostProcessorLogger implements FigurePostProcessorLo
     @Override
     public void logPostProcess(Figure figure) throws FigureException {
         logger.log(Level.INFO, "!!!\t" + figure.getFigureType() + "create, Figure ID: " + figure.getId());
-        //return figure;
     }
 }
