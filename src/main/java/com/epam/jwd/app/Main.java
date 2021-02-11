@@ -40,6 +40,10 @@ public class Main {
         pointsForSquare.add(new Point(6, 6));
         pointsForSquare.add(new Point(1, 6));
 
+        List<Point> pointsForTriangle2 = new ArrayList<>();
+        pointsForTriangle.add(new Point(1, 1));
+        pointsForTriangle.add(new Point(1, 5));
+        pointsForTriangle.add(new Point(4, 1));
 
         ApplicationContext  applicationContext = new ConcreteApplicationContext();
 
@@ -71,11 +75,19 @@ public class Main {
             logger.log(Level.INFO, "Square: Area = " + square.calculateArea()
                     + " Perimeter = " + square.calculatePerimeter());
 
+            //MultiAngel
             Figure multiAngeleFigure = applicationContext.createFigureFactory().createFigure(FigureType.MULTIANGLE,
                     pointsForMultiAngel);
             multiAngeleFigure.outputInformation();
             logger.log(Level.INFO, "MultiAngel figure: Area = " + multiAngeleFigure.calculateArea()
                     + " Perimeter = " + multiAngeleFigure.calculatePerimeter());
+
+            //triangle
+            Figure triangle2 = applicationContext.createFigureFactory().createFigure(FigureType.TRIANGLE,
+                    pointsForTriangle);
+            triangle2.outputInformation();
+            logger.log(Level.INFO, "Triangle: Array = " + triangle2.calculateArea()
+                    + " Perimeter = " + triangle2.calculatePerimeter());
         } catch (FigureException e) {
             logger.log(Level.ERROR, "Exception " + e.toString());
         }
