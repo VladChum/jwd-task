@@ -79,5 +79,7 @@ public class Main {
         } catch (FigureException e) {
             logger.log(Level.ERROR, "Exception " + e.toString());
         }
+
+        applicationContext.outputFigureCash();
     }
 }
