@@ -19,7 +19,24 @@ public class PostProcessorCashDecorator extends ConcreteApplicationContext imple
     @Override
     public Figure createFigure(FigureType figureType, List<Point> points) throws FigureException {
         Figure figure = factory.createFigure(figureType, points);
-        setFigureCash(figure);
+
+        return equalsFigureAndFigureCash(figure);
+    }
+
+    private Figure equalsFigureAndFigureCash(Figure figure) {
+        List<Figure> figureCash = getFigureCash();
+        int equal = 0;
+        for (int i = 0; i < figureCash.size(); i++) {
+            if (figure.getFigureType().equals(figureCash.get(i).getFigureType())
+                    && figure.getPoints().equals(figureCash.get(i).getPoints())) {
+                figure = figureCash.get(i);
+                equal++;
+                break;
+            }
+        }
+        if (equal == 0) {
+            setFigureCash(figure);
+        }
         return figure;
     }
 }

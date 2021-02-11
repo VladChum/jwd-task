@@ -14,10 +14,14 @@ import java.util.List;
 import static com.epam.jwd.app.Main.logger;
 
 public class ConcreteApplicationContext implements ApplicationContext {
-    private static List<Figure> figureCash = new ArrayList<>();
+    static List<Figure> figureCash = new ArrayList<>();
 
     public void setFigureCash(Figure figure) {
         this.figureCash.add(figure);
+    }
+
+    public static List<Figure> getFigureCash() {
+        return figureCash;
     }
 
     @Override
