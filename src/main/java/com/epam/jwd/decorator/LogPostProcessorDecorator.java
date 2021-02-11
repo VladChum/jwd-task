@@ -11,10 +11,8 @@ import com.epam.jwd.service.impl.FigureExistencePostProcessorLogger;
 import java.util.List;
 
 public class LogPostProcessorDecorator implements Factory {
-
     private final Factory factory;
     private final static FigurePostProcessorLogger figurePostProcessorLog = new FigureExistencePostProcessorLogger();
-
 
     public LogPostProcessorDecorator(Factory factory) {
         this.factory = factory;
